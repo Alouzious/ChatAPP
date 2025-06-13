@@ -9,6 +9,7 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('logout/', views.logout, name='logout'),
     path('registered_users/', views.registered_users, name='registered_users'),
+    path('send-request/<int:user_id>/', views.send_request, name='send_request'),
 
 
 ]

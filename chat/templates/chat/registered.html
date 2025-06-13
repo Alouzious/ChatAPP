@@ -3,16 +3,26 @@
 
 {% block title %}Registered Users | MyWeChat{% endblock %}
 
+{% block styles %}
+<link rel="stylesheet" href="{% static 'chat/css/registered.css' %}">
+{% endblock styles %}
+
 
 
 {% block content %}
+
+{% if messages %}
+<div class="messages">
+    {% for message in messages %}
+        <div class="message {{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+</div>
+{% endif %}
+
 <div class="registered_users" id="registered">
     <div class="registered_header">
         <h1>People You Can Connect With</h1>
     </div>
-    <p>Logged in as: {{ request.user.username }} | Users found: {{ users|length }}</p>
-    <p>Click "Connect" to send a connection request to any user.</p>
-    
     {% if request.user.is_authenticated %}
         <p>Welcome, {{ request.user.username }}!</p>
     {% else %}
@@ -24,7 +34,7 @@
                 <div class="user_avatar">
                     <!-- Show first letter of username in uppercase -->
                     <div class="default_avatar">{{ user.username|slice:":1"|upper }}</div>
-                    <div class="username">{{ user.username }}</div>
+                    <div class="username">{{ user.username }} (ID: {{ user.id }})</div>
                 </div>
                 <div class="user_status">
                     {% if user.is_active %}
@@ -34,9 +44,9 @@
                     {% endif %}
                 </div>
                 <div class="user_connect">
-                    <form action="{% url 'send_request' user.id %}" method="post">
+                    <form action="{% url 'chat:send_request' user.id %}" method="post" class="connect-form">
                         {% csrf_token %}
-                        <button type="submit" class="connect_button" onclick="return confirm('Are you sure you want to connect with this user?');">
+                        <button type="submit" class="connect_button">
                             Connect
                         </button>
                     </form>
@@ -48,3 +58,6 @@
     </div>
 </div>
 {% endblock %}
+{% block scripts %}
+  <script src="{% static 'chat/js/registered.js' %}"></script>
+{% endblock  %}
