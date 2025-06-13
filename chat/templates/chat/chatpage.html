@@ -1,0 +1,109 @@
+{% extends "chat/base.html" %}
+{% load static %}
+
+{% block title %}Chat Page | MyWeChat{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'chat/css/chatpage.css' %}">
+<link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+  <div class="chat-container">
+    <div class="sidebar">
+      <div class="sidebar-header">MyWeChat Friends</div>
+
+      <div class="search-bar">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search friends..."
+          autocomplete="off"
+        />
+      </div>
+
+      <ul class="friends-list">
+        {% for friend in friends %}
+          <li class="friend-item" data-friend-id="{{ friend.id }}">
+            <div class="friend-avatar">{{ friend.name|slice:":1"|upper }}</div>
+            <div class="friend-info">
+              <div class="friend-name">{{ friend.name }}</div>
+              <div class="friend-status">{{ friend.status }}</div>
+            </div>
+          </li>
+        {% empty %}
+          <li>No friends available.</li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <!-- Main Chat -->
+    <div class="chat-main">
+      <div class="chat-header">
+        <div class="Friend-avatar" id="chatFriendAvatar">
+          <!-- Default first friend initial or empty -->
+          {% if friends %}
+            {{ friends.0.name|slice:":1"|upper }}
+          {% else %}
+            ?
+          {% endif %}
+        </div>
+
+        <div class="friend-info">
+          <div class="friend-name" id="chatFriendName">
+            {% if friends %}
+              {{ friends.0.name }}
+            {% else %}
+              Select a friend
+            {% endif %}
+          </div>
+          <div class="friend-status" id="chatFriendStatus">
+            {% if friends %}
+              {{ friends.0.status }}
+            {% else %}
+              Offline
+              Lastseen: {{ friends.0.last_seen|date:"g:i A" }}
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="chat-actions">
+          <button class="action-btn" title="Call">📞</button>
+          <button class="action-btn" title="Video Call">🎥</button>
+          <button class="action-btn" title="Settings">⚙️</button>
+        </div>
+      </div>
+
+      <div class="message-container">
+        <div class="message-list" id="messageList">
+          {% comment %} 
+          Loop through chat messages here for the selected friend if available
+          {% endcomment %}
+          {% for message in messages %}
+            <div class="message {% if message.sent_by_me %}sent{% else %}received{% endif %}">
+              <p class="message-text">{{ message.text }}</p>
+              <span class="message-time">{{ message.timestamp|date:"g:i A" }}</span>
+            </div>
+          {% empty %}
+            <p style="padding:20px; color:#888;">No messages yet.</p>
+          {% endfor %}
+        </div>
+      </div>
+
+      <form id="messageForm" autocomplete="off">
+        <input
+          type="text"
+          id="messageInput"
+          placeholder="Type your message..."
+          required
+        />
+        <button type="submit">Send</button>
+      </form>
+    </div>
+  </div>
+
+{% endblock %}
+{% block scripts %}
+  <script src="{% static 'chat/js/chatpage.js' %}"></script>
+{% endblock %}
+

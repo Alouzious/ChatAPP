@@ -1,0 +1,68 @@
+{% extends 'chat/base.html' %}
+
+{% load static %} 
+
+{% block title %}Login | MyWeChat {% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'chat/css/login.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class="login-page-container">
+        <!-- Left side - Welcome section -->
+        <div class="welcome-section">
+            <div>
+                <h1>Welcome to<br>MyWeChat 👋</h1>
+                <p class="tagline">Chat instantly. Connect deeply.</p>
+                
+                <ul class="feature-list">
+                    <li>🔒 Secure & private messaging</li>
+                    <li>🌍 Connect with friends across the globe</li>
+                    <li>📸 Share photos, videos & memories</li>
+                    <li>⚡ Real-time conversations anytime</li>
+                    <li>✨ Simple, fast & beautiful experience</li>
+                </ul>
+                
+                <p class="bottom-text">
+                    Join the future of chatting. MyWeChat —<br>
+                    keeping you close, no matter the distance.
+                </p>
+            </div>
+        </div>
+        
+        <!-- Right side - Login form -->
+        <div class="login-section">
+            <div class="login-container">
+                <div class="form-box">
+                    <h2>Login to MyWeChat</h2>
+                    
+                    {% if error %}
+                        <div class="error-message">{{ error }}</div>
+                    {% endif %}
+                    
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="input-group">
+                            <label for="username">Username</label>
+                            <input type="text" id="username" name="username" placeholder="" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="password" placeholder="" required>
+                        </div>
+                        <button type="submit" class="submit-btn">Login</button>
+                        <p class="register-link">Don't have an account? <a href="{% url 'chat:register' %}">Register here</a></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+ 
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'chat/js/login.js' %}"></script>
+{% endblock %}

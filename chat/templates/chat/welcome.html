@@ -1,0 +1,25 @@
+{% extends "chat/base.html" %}
+{% load static %}
+
+{% block title %}Welcome{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'chat/css/welcome.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="welcome-section">
+    <div class="welcome-box">
+        <h1>Welcome to <span class="highlight">MyWeChat</span></h1>
+        <p>We are glad to have you here. Please log in or register to continue.</p>
+        <div class="buttons">
+            <a href="{% url 'chat:login' %}" class="btn" id="login-button">Login</a>
+            <a href="{% url 'chat:register' %}" class="btn outline" id="register-button">Register</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'chat/js/welcome.js' %}"></script>
+{% endblock %}

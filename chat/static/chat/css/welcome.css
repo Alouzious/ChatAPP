@@ -1,0 +1,84 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: #0d6efd; 
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+}
+
+.welcome-section {
+    background-image: url(../images/back.jpg);
+    background-attachment: fixed;
+    background-position: center;
+    /* background-size: cover; */
+    /* background-blend-mode: overlay; */
+    background-repeat: no-repeat;
+    background-color: blue;  
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Box styling */
+.welcome-box {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    color: #fff;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Welcome text */
+.welcome-box h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.highlight {
+    color: #ffd700;
+}
+
+.welcome-box p {
+    font-size: 1.1em;
+    margin-bottom: 30px;
+}
+
+/* Button styles */
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.btn {
+    text-decoration: none;
+    background-color: #1e90ff;
+    padding: 12px 24px;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background-color: #0d6efd;
+}
+
+.btn.outline {
+    background-color: transparent;
+    border: 2px solid #fff;
+}
+
+.btn.outline:hover {
+    background-color: #fff;
+    color: #1e90ff;
+}

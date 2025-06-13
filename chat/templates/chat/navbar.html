@@ -1,0 +1,21 @@
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'chat/css/navbar.css' %}">
+<!-- <link rel="stylesheet" href="{% static 'chat/css/welcome.css' %}"> -->
+
+
+{% endblock styles %}
+
+  <nav class="navbar">
+    <div class="brand">MyWeChat</div>
+    <ul class="nav-links">
+      {% if user.is_authenticated %}
+        <li><a href="{% url 'chat:profile' %}">{{ user.username }}</a></li>
+        <li><a href="{% url 'chat:logout' %}">Logout</a></li>
+      {% else %}
+        <li><a href="{% url 'chat:login' %}">Login</a></li>
+        <li><a href="{% url 'chat:register' %}">Register</a></li>
+      {% endif %}
+    </ul>
+  </nav>
